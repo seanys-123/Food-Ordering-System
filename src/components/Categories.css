@@ -1,0 +1,40 @@
+.categories {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    flex: 1;
+}
+
+.categories h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.categories ul {
+    list-style: none;
+    padding: 0;
+}
+
+.categories li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    font-size: 0.95em;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.categories li:last-child {
+    border-bottom: none;
+}
+
+.categories li span:first-child {
+    font-weight: bold;
+    color: #ff6347;
+}
+
+.categories li span:last-child {
+    font-size: 0.85em;
+    color: #666;
+}

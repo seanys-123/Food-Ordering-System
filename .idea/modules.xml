@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../foodhub.iml" filepath="$PROJECT_DIR$/../foodhub.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Foodhub - User Management System.iml" filepath="$PROJECT_DIR$/../Foodhub - User Management System.iml" />
     </modules>
   </component>
 </project>

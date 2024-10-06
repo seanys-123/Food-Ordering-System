@@ -1,0 +1,4 @@
+userstory
+
+1) when customer clicked on the store name, the menu of the store will display 
+-> 

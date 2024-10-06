@@ -1,29 +1,52 @@
 import React from 'react';
-import './Categories.css';
 
 const categories = [
-    { name: 'Asian Delights', options: 548 },
-    { name: 'Ah Meng Roast', options: 1478 },
-    { name: 'Western Express', options: 50 },
-    { name: 'Indian Village', options: 548 },
-    { name: 'Jin Kimchi Express', options: 548 },
-    { name: 'FoodHub Drink Stall', options: 548 },
+    { name: 'Asian Delights'},
+    { name: 'Ah Meng Roast'},
+    { name: 'Western Express'},
+    { name: 'Indian Village'},
+    { name: 'Jin Kimchi Express'},
+    { name: 'FoodHub Drink Stall'},
 ];
 
-const Categories: React.FC = () => {
+interface MenuItem {
+    name: string;
+    price: number;
+    image: string;
+}
+
+interface CategoriesProps {
+    setMenuItems: React.Dispatch<React.SetStateAction<MenuItem[]>>;
+}
+
+const Categories: React.FC<CategoriesProps> = ({ setMenuItems }) => {
+    const fetchMenu = async (stallName: string) => {
+        try {
+            const response = await fetch(`/api/menu?stall=${encodeURIComponent(stallName)}`);
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const menu: MenuItem[] = await response.json();
+            setMenuItems(menu); // Update menu items to show in the Favorites component
+        } catch (error) {
+            console.error('Failed to fetch menu:', error);
+        }
+    };
+
     return (
         <div className="categories">
             <h3>Categories</h3>
             <ul>
                 {categories.map((category, index) => (
                     <li key={index}>
-                        <span>{category.name}</span>
-                        <span>{category.options}+ options</span>
+                        <button onClick={() => fetchMenu(category.name)}>
+                            <span>{category.name}</span>
+                        </button>
                     </li>
                 ))}
             </ul>
         </div>
     );
-}
+};
 
 export default Categories;

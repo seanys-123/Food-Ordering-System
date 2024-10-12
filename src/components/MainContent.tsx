@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Categories from './Categories';
 import Favorites from './Menu';
 import chickenCurry from '../images/Chicken-Curry.jpg';
@@ -19,18 +19,6 @@ interface MenuItem {
 
 const MainContent: React.FC = () => {
     const [menuItems, setMenuItems] = useState<MenuItem[]>(defaultFavoriteItems);
-    const [userId, setUserId] = useState<string | null>(null);
-
-    // useEffect to retrieve the userId from sessionStorage when the component mounts
-    useEffect(() => {
-        const storedUserId = sessionStorage.getItem('userId');
-        const storedUsername = sessionStorage.getItem('username');
-        const storedRoleId = sessionStorage.getItem('roleId');
-        console.log('User ID from session:', storedUserId);
-        console.log('username from session:', storedUsername);
-        console.log('Role ID from session:', storedRoleId);
-
-    }, []); // Empty array ensures this runs once when the component mounts
 
     return (
         <div className="main-content">

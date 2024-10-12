@@ -3,7 +3,7 @@ import axios from 'axios';
 import './Login.css'; // Import the CSS file
 
 interface LoginProps {
-  onLoginSuccess: (userId: string) => void; // Callback to handle successful login
+  onLoginSuccess: (userId: string, roleId: number) => void; // Callback to handle successful login
   onGuestLogin: () => void; // Callback to handle guest login
 }
 
@@ -35,7 +35,7 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess, onGuestLogin }) => {
           sessionStorage.setItem('roleId', roleId);
           sessionStorage.setItem('username', username);
           console.log(`Logged in as ${username}, User ID: ${userId}, role ID: ${roleId}`);
-          onLoginSuccess(userId); // Callback for successful login
+          onLoginSuccess(userId, roleId); // Callback for successful login
         }
       } catch (error: any) {
           if (error.response) {

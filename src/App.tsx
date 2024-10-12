@@ -9,13 +9,23 @@ import './App.css';
 const App: React.FC = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // State to track login
 
-  // Function to handle login or guest login
-  const handleLogin = () => {
-    setIsLoggedIn(true);
+  // Function to handle successful login
+  const handleLoginSuccess = (userId: string) => {
+    console.log(`Logged in with User ID: ${userId}`);
+    setIsLoggedIn(true); // Set login state to true
+  };
+
+  // Function to handle guest login
+  const handleGuestLogin = () => {
+    console.log('Logged in as Guest');
+    setIsLoggedIn(true); // Set login state to true
   };
 
   // Function to handle logout
   const handleLogout = () => {
+    sessionStorage.removeItem('userId');
+    sessionStorage.removeItem('roleId');
+    sessionStorage.removeItem('username');
     setIsLoggedIn(false); // Reset login state to false, returning to login page
   };
 
@@ -31,10 +41,11 @@ const App: React.FC = () => {
           </div>
         </>
       ) : (
-        <Login onGuestLogin={handleLogin} />
+        // Pass both onLoginSuccess and onGuestLogin to the Login component
+        <Login onLoginSuccess={handleLoginSuccess} onGuestLogin={handleGuestLogin} />
       )}
     </div>
   );
-}
+};
 
 export default App;

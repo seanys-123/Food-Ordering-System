@@ -49,9 +49,12 @@ const App: React.FC = () => {
                 {/* Conditionally render VendorPage or MainContent based on roleId */}
                 {roleId === 2 ? (
                   <VendorPage /> // Render VendorPage if roleId is 2
+                ) : roleId === 3 ? (
+                  <MainContent /> // Render MainContent if roleId is 4
                 ) : roleId === 4 ? (
                   <MainContent /> // Render MainContent if roleId is 4
-                ) : (
+                )
+                : (
                   <div>No page available for your role</div> // Handle other roles
                 )}
               </div>

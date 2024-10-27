@@ -27,7 +27,7 @@ const Categories: React.FC<CategoriesProps> = ({ setMenuItems }) => {
                 throw new Error('Network response was not ok');
             }
             const menu: MenuItem[] = await response.json();
-            setMenuItems(menu); // Update menu items to show in the Favorites component
+            setMenuItems(menu);
         } catch (error) {
             console.error('Failed to fetch menu:', error);
         }

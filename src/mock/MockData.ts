@@ -3,6 +3,31 @@ import prataSetA from '../images/Prata-Set-A.jpg';
 import braisedDuckRice from '../images/Braised-Duck-Rice.png';
 import chickenCurry from '../images/Chicken-Curry.jpg';
 import { Vendor } from '../models/Vendor';
+import { VendorStoreInfo, VendorStoreOpeningHours, VendorStorePromotion } from '../models/VendorStoreInfo';
+
+export const mockVendorStoreOpeningHours: VendorStoreOpeningHours = {
+        openingHoursID: 1,
+        vendorProfileID: 123,
+        day: 1, 
+        openTime: new Date('2024-10-13T08:00:00'),
+        closingtTime: new Date('2024-10-13T18:00:00'),
+        isOpen: true,
+    }
+
+export const mockVendorStorePromotion: VendorStorePromotion = {
+        promotionID: 10,
+        promoCode: 'SAVE10',
+        discount: 10,
+        discountType: 'percentage',
+        minimumSpending: 50,
+        isValid: true,
+        vendorProfileID: 123,
+    }
+
+    export const mockVendorStoreInfo: VendorStoreInfo = {
+        openingHours: mockVendorStoreOpeningHours,
+        promotion: mockVendorStorePromotion
+    };
 
 export const mockMenuItems: MenuItem[] = [
     {
@@ -93,23 +118,13 @@ export const mockMenuItems: MenuItem[] = [
 export const mockVendor: Vendor[] = [
     {
         vendorProfileID: '1',
-        profileName: 'Best Chicken Curry',
-        address: '123 Curry Road, Spice Town',
-        email: 'bestchicken@curry.com',
-        phone: '1234-7891',
-        status: true,
-        userID: '1',
-        shopDesc: 'Delicious chicken curry served with rice and naan bread.'
-    },
-    {
-        vendorProfileID: '2',
-        profileName: 'Duck Delight',
-        address: '456 Roast Lane, Food City',
-        email: 'duckdelight@foodcity.com',
-        phone: '9985-4321',
+        profileName: 'Amy ABC',
+        address: 'Road 1, Singapore 123456',
+        email: 'amy@example.com',
+        phone: '90123456',
         status: true,
         userID: '2',
-        shopDesc: 'Specializing in roast duck and various rice dishes.'
+        shopDesc: 'Delicious chicken curry served with rice and naan bread.'
     },
     {
         vendorProfileID: '3',

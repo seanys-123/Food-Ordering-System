@@ -1,0 +1,65 @@
+name: Deploy React App to ECS
+
+on:
+  push:
+    branches:
+      - release-1 # Trigger on pushes to the main branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out the code
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      # Step 2: Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      # Step 3: Install dependencies and build the React app
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build the React app
+        run: npm run build
+
+      # Step 4: Log in to Amazon ECR
+      - name: Log in to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v1
+
+      # Step 5: Build and push Docker image to ECR
+      - name: Build and push Docker image to ECR
+        env:
+          ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          # Build the Docker image
+          docker build -t $ECR_REGISTRY:latest .
+          docker tag $ECR_REGISTRY:latest $ECR_REGISTRY:$IMAGE_TAG
+          
+          # Push the image to ECR
+          docker push $ECR_REGISTRY:latest
+          docker push $ECR_REGISTRY:$IMAGE_TAG
+
+      # Step 6: Deploy to ECS
+      - name: Deploy to Amazon ECS
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
+          ECS_CLUSTER_NAME: ${{ secrets.ECS_CLUSTER_NAME }}
+          ECS_SERVICE_NAME: ${{ secrets.ECS_SERVICE_NAME }}
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          # Update ECS service with the new image
+          aws ecs update-service \
+            --cluster $ECS_CLUSTER_NAME \
+            --service $ECS_SERVICE_NAME \
+            --force-new-deployment \
+            --region $AWS_REGION

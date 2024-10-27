@@ -20,7 +20,7 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess, onGuestLogin }) => {
     if (username && password) {
       try {
         // Axios POST request to login
-        const response = await axios.post('http://localhost:8080/api/auth/login', {
+        const response = await axios.post('http://userbackend-702001183.ap-southeast-1.elb.amazonaws.com:8080/api/auth/login', {
           username,
           password
         });
@@ -55,7 +55,7 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess, onGuestLogin }) => {
   const handleGuestLogin = async () => {
     try {
       // Axios GET request for guest login
-      const response = await axios.get('http://localhost:8080/api/auth/guest');
+      const response = await axios.get('http://userbackend-702001183.ap-southeast-1.elb.amazonaws.com:8080/api/auth/guest');
 
       // If guest login is successful
       if (response.status === 200) {

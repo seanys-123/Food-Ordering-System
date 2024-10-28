@@ -34,6 +34,7 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess, onGuestLogin }) => {
           sessionStorage.setItem('userId', userId);
           sessionStorage.setItem('roleId', roleId);
           sessionStorage.setItem('username', username);
+          localStorage.setItem('userId', userId);
           console.log(`Logged in as ${username}, User ID: ${userId}, role ID: ${roleId}`);
           onLoginSuccess(userId, roleId); // Callback for successful login
         }

@@ -4,9 +4,10 @@ import './Sidebar.css';
 
 interface SidebarProps {
   handleLogout: () => void; // Prop for the logout function
+  toOrderPage: () => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ handleLogout }) => {
+const Sidebar: React.FC<SidebarProps> = ({ handleLogout, toOrderPage }) => {
   return (
     <div className="sidebar">
       <div className="sidebar-logo">Food Hub</div>
@@ -15,7 +16,7 @@ const Sidebar: React.FC<SidebarProps> = ({ handleLogout }) => {
         <li>Explore</li>
         <li>Favourite</li>
         <li>Order</li>
-        <li>Order History</li>
+        <li className="orderHistory" onClick={toOrderPage}>Order History</li>
         <li>Messages</li>
         <li>Reviews</li>
         <li>Settings</li>

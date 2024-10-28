@@ -5,11 +5,13 @@ import Header from './components/Header';
 import MainContent from './components/MainContent';
 import Login from './components/Login';
 import VendorPage from './components/VendorPage';
+import OrderPage from './components/OrderPage';
 import './App.css';
 
 const App: React.FC = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // State to track login
   const [roleId, setRoleId] = useState<number | null>(null);
+  const [isOrderHistory, setIsOrderHistory] = useState(false);
 
   useEffect(() => {
       const storedRoleId = sessionStorage.getItem('roleId');
@@ -35,7 +37,19 @@ const App: React.FC = () => {
   // Function to handle logout
   const handleLogout = () => {
     sessionStorage.clear();
+    setIsOrderHistory(false);
     setIsLoggedIn(false); // Reset login state to false, returning to login page
+  };
+
+  const toOrderPage = () => {
+    console.log("got here");
+    setIsOrderHistory(true);
+    console.log(isOrderHistory);
+  };
+
+  const closeOrderPage = () =>{
+    setIsOrderHistory(false);
+    console.log(isOrderHistory);
   };
 
   return (
@@ -43,7 +57,7 @@ const App: React.FC = () => {
           {/* Conditionally render Login or the appropriate page based on roleId */}
           {isLoggedIn ? (
             <>
-              <Sidebar handleLogout={handleLogout} />
+              <Sidebar handleLogout={handleLogout} toOrderPage={ toOrderPage } />
               <div className="main-section">
                 <Header />
                 {/* Conditionally render VendorPage or MainContent based on roleId */}
@@ -52,8 +66,12 @@ const App: React.FC = () => {
                 ) : roleId === 3 ? (
                   <MainContent /> // Render MainContent if roleId is 4
                 ) : roleId === 4 ? (
-                  <MainContent /> // Render MainContent if roleId is 4
-                )
+                  <>
+                  {isOrderHistory === true ?(
+                    <OrderPage closeOrderPage = {closeOrderPage}/>
+                  ):<MainContent /> }
+                  </>
+                ) 
                 : (
                   <div>No page available for your role</div> // Handle other roles
                 )}

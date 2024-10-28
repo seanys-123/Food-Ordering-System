@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Categories from './Categories';
 import Menu from './Menu';
 import { MenuItem } from '../type';

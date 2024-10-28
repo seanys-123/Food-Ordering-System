@@ -19,7 +19,7 @@ const MainContent: React.FC = () => {
     const fetchCategoryMenu = async (vendorProfileID: string) => {
         try {
             //const response = await fetch(`http://localhost:8080/api/menu_items?vendorProfileID=${vendorProfileID}`);
-            const response = await fetch(`https://09pq3u56g9.execute-api.ap-southeast-1.amazonaws.com/defaul/menu_items/get/${vendorProfileID}`);
+            const response = await fetch(`https://09pq3u56g9.execute-api.ap-southeast-1.amazonaws.com/default/menu_items/get/${vendorProfileID}`);
             if (!response.ok) {
                 throw new Error('Failed to fetch the category menu.');
             }

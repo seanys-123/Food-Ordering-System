@@ -15,6 +15,24 @@ const MainContent: React.FC = () => {
     });
     const [orderID, setOrderID] = useState<string | null>(null); // Store the order ID after submission
 
+    // New useEffect hook to check and set customerID
+        useEffect(() => {
+            // Retrieve customerID from sessionStorage on mount
+            const storedCustomerID = sessionStorage.getItem('userId');
+
+            if (!storedCustomerID) {
+                // If no customerID is found, redirect to login
+                navigate('/login');
+            } else {
+                // Set customerID in order state
+                setOrder((prevOrder) => ({
+                    ...prevOrder,
+                    customerID: storedCustomerID,
+                }));
+            }
+        }, [navigate]);
+        // End of added useEffect hook
+
     // Function to fetch category-specific menu
     const fetchCategoryMenu = async (vendorProfileID: string) => {
         try {
